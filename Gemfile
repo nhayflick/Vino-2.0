@@ -47,3 +47,7 @@ gem 'ejs'
 
 #bootstrap
 gem "twitter-bootstrap-rails"
+
+gem "twitter"
+
+gem "figaro"

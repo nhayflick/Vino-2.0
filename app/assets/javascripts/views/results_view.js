@@ -40,7 +40,7 @@ VI.Views.ResultsView = Backbone.View.extend({
       $("html,body").animate({ scrollTop: that.scrollHeight}, "slow");
       // Unhides the navbar
       $(".navbar").slideDown();
-    }, 1000);  
+    }, 1800);  
   },
 
   scrollToNext: function() {

@@ -1,7 +1,7 @@
 <script>
 
   var queries = <%= @queries.to_json.html_safe%>;
-  var $navContent = $("#nav-content");
+  var $navbar = $(".nav-content");
   var $main = $(".main");
   var $content = $(".content");
 
@@ -17,12 +17,10 @@
 
     window.VI.initialize(
       queries,
-      $navContent,
+      $navbar,
       $main,
       $content
     )
   });
-
-  window.alert("June 12th 2013: Vino is currently on vacation due to changes in Twitter's API policy. Check back soon for a new and improved Vino experience. :)")
   
 </script>

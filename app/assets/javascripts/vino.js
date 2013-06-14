@@ -6,23 +6,23 @@ window.VI = {
   Store: {},
 
 
-  initialize: function(queries, $navcontent, $main, $content) {
+  initialize: function(queries, $navbar, $main, $content) {
     var that = this;
     VI.Store.Queries = new VI.Collections.Queries(queries);
     VI.Store.CurrentlyPlaying = new VI.Collections.Vines();
     new VI.Routers.QueriesRouter($content);
-    that.installNav($navcontent);
+    that.installNav($navbar);
     that.installMainView($main);
     Backbone.history.start();
   },
 
 
-  installNav: function(navcontent) {
+  installNav: function(navbar) {
     var that = this;
     var indexQueriesView = new VI.Views.IndexQueriesView({
       collection: VI.Store.CurrentlyPlaying
     })
-    $(navcontent).html(indexQueriesView.render().$el)
+    $(navbar).html(indexQueriesView.render().$el)
   }, 
 
   installMainView: function(main) {

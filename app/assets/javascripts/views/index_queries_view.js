@@ -6,6 +6,7 @@ VI.Views.IndexQueriesView = Backbone.View.extend({
 
   initialize: function() {
     var that = this;
+    // that.$("nav-search").searchRender();
     that.collection.on("all", function() {
       // When the CurrentlyPlaying collection is changed, the navbar refreshes itself to display new metadata
       that.render();
@@ -16,7 +17,7 @@ VI.Views.IndexQueriesView = Backbone.View.extend({
 
   initiateSearch: function() {
     var that = this;
-    var queryString = encodeURIComponent(that.$(".search-query").val())
+    var queryString = encodeURIComponent($(".search-query").val())
     Backbone.history.navigate("search?" + queryString, {trigger: true});
   },
 
@@ -25,7 +26,15 @@ VI.Views.IndexQueriesView = Backbone.View.extend({
     var renderedContent = JST["queries/index"]({
       queries: that.collection
     })
+    console.log(that.$el);
     that.$el.html(renderedContent);
+    return that
+  },
+
+  searchRender: function() {
+    var that = this;
+    var renderedContent = JST["queries/searchbar"]()
+    that.$el.find(".nav-search").first().html(renderedContent);
     return that;
   }
 });

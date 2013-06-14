@@ -4,19 +4,18 @@ VI.Collections.Vines = Backbone.Collection.extend({
   sync: function () { return false; },
 
 //Sends an HTTP request to the Twitter search API for Vine.co links and passes the returned data.
-twitterFetch: function(querystring, callback) {
+twitterFetch: function(queryString, callback) {
   var that = this;
-  var query = "vine.co%20" + encodeURIComponent(querystring);
-  var queryModel = new VI.Models.Query({body: querystring});
-  queryModel.save();
-  $.getJSON("http://search.twitter.com/search.json?callback=?",{
-      include_entities: "true",
-      q: query
-    }, function(data) {
-    if(data.next_page) {
-      VI.Store.NextPageURL = data.next_page
+  var queryModel = new VI.Models.Query();
+  console.log("creating")
+  queryModel.save({body: queryString},{
+    success: function(){
+      console.log(queryModel.get("response"));
+      that.addFromQuery(queryModel.get("response"), callback);
+    },
+    error: function(){
+      console.log(error)
     }
-    that.addFromQuery(data.results, callback);
   });
 },
 
@@ -75,11 +74,11 @@ twitterFetch: function(querystring, callback) {
       url: endUrl,
       // Vine's embed link as a fallback for browsers lacking HTML5 video
       fallback_url: datum.entities.urls[0].expanded_url,
-      from_user: datum.from_user,
-      from_user_id: datum.from_user_id,
-      from_user_name: datum.from_user_name,
+      from_user: datum.user.screen_name,
+      from_user_id: datum.user.id,
+      from_user_name: datum.user.name,
       created_at: datum.created_at,
-      profile_image_url: datum.profile_image_url,
+      profile_image_url: datum.user.profile_image_url,
       text: datum.text, 
     });
     // Ensure Vine URL is unique before adding to collection

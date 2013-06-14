@@ -14,7 +14,8 @@ class QueriesController < ApplicationController
   end
 
   def create
-    @query = Query.new(params[:query])
+    @response = Twitter.search("vine.co% " + params[:query][:body]).results
+    @query = Query.new(body: params[:query][:body], response: @response)
     if @query.save
       render :json => @query
     else
