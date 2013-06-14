@@ -25,13 +25,18 @@ a{color: rgb(55, 49, 219);}
 }
 
 .nav-content{
+  float: left;
   width: 500px;
   height: 40px;
-  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .nav-search{
   margin-top: 4px;
   margin-right: 5px;
   overflow: hidden;
   height: 35px;
+}
+
+.navbar-inner{
+  z-index: 1;
 }
