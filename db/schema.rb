@@ -11,13 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613224417) do
+ActiveRecord::Schema.define(:version => 20130616024849) do
+
+  create_table "queried_vines", :force => true do |t|
+    t.integer  "query_id"
+    t.integer  "vine_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "queries", :force => true do |t|
     t.string   "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.text     "response"
+  end
+
+  create_table "vines", :force => true do |t|
+    t.string   "url"
+    t.string   "fallback_url"
+    t.string   "from_user"
+    t.string   "from_user_id"
+    t.string   "profile_image_url"
+    t.datetime "tweeted_at"
+    t.string   "text"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
 end
